@@ -6,15 +6,19 @@ const EthereumABI = require('./ethereum/abi')
 const EthereumSubgraph = require('./ethereum/subgraph')
 const NearSubgraph = require('./near/subgraph')
 const CosmosSubgraph = require('./cosmos/subgraph')
+const StarknetSubgraph = require('./starknet/subgraph')
 const EthereumContract = require('./ethereum/contract')
 const NearContract = require('./near/contract')
+const StarknetContract = require('./starknet/contract')
 const EthereumManifestScaffold = require('./ethereum/scaffold/manifest')
 const NearManifestScaffold = require('./near/scaffold/manifest')
 const CosmosManifestScaffold = require('./cosmos/scaffold/manifest')
 const ArweaveMappingScaffold = require('./arweave/scaffold/mapping')
+const StarknetManifestScaffold = require('./starknet/scaffold/manifest')
 const EthereumMappingScaffold = require('./ethereum/scaffold/mapping')
 const NearMappingScaffold = require('./near/scaffold/mapping')
 const CosmosMappingScaffold = require('./cosmos/scaffold/mapping')
+const StarknetMappingScaffold = require('./starknet/scaffold/mapping')
 
 module.exports = class Protocol {
   static fromDataSources(dataSourcesAndTemplates) {
@@ -33,7 +37,8 @@ module.exports = class Protocol {
       arweave: ['arweave'],
       ethereum: ['ethereum', 'ethereum/contract'],
       near: ['near'],
-      cosmos: ['cosmos']
+      cosmos: ['cosmos'],
+      starknet: ['starknet'],
     })
   }
 
@@ -74,10 +79,11 @@ module.exports = class Protocol {
         'cosmoshub-4',
         'theta-testnet-001', // CosmosHub testnet
         'osmosis-1',
-        'osmo-test-4',       // Osmosis testnet
-        'juno-1', 
-        'uni-3'              // Juno testnet
+        'osmo-test-4', // Osmosis testnet
+        'juno-1',
+        'uni-3', // Juno testnet
       ],
+      starknet: ['starknet-mainnet', 'starknet-goerli'],
     })
   }
 
@@ -97,6 +103,8 @@ module.exports = class Protocol {
         return 'NEAR'
       case 'cosmos':
         return 'Cosmos'
+      case 'starknet':
+        return 'StarkNet'
     }
   }
 
@@ -118,6 +126,9 @@ module.exports = class Protocol {
         return false
       case 'cosmos':
         return false
+      case 'starknet':
+        // TODO: support ABI
+        return false
     }
   }
 
@@ -130,6 +141,9 @@ module.exports = class Protocol {
       case 'near':
         return true
       case 'cosmos':
+        return false
+      case 'starknet':
+        // TODO: support contracts
         return false
     }
   }
@@ -144,6 +158,9 @@ module.exports = class Protocol {
         return false
       case 'cosmos':
         return false
+      case 'starknet':
+        // TODO: support events
+        return false
     }
   }
 
@@ -157,6 +174,8 @@ module.exports = class Protocol {
         return false
       case 'cosmos':
         return false
+      case 'starknet':
+        return true
     }
   }
 
@@ -169,6 +188,9 @@ module.exports = class Protocol {
       case 'near':
         return null
       case 'cosmos':
+        return null
+      case 'starknet':
+        // TODO: support type generation
         return null
     }
   }
@@ -198,6 +220,8 @@ module.exports = class Protocol {
         return null
       case 'cosmos':
         return null
+      case 'starknet':
+        return null
     }
   }
 
@@ -213,6 +237,8 @@ module.exports = class Protocol {
         return new NearSubgraph(optionsWithProtocol)
       case 'cosmos':
         return new CosmosSubgraph(optionsWithProtocol)
+      case 'starknet':
+        return new StarknetSubgraph(optionsWithProtocol)
       default:
         throw new Error(`Data sources with kind '${this.name}' are not supported yet`)
     }
@@ -228,6 +254,8 @@ module.exports = class Protocol {
         return NearContract
       case 'cosmos':
         return null
+      case 'starknet':
+        return StarknetContract
     }
   }
 
@@ -241,6 +269,8 @@ module.exports = class Protocol {
         return NearManifestScaffold
       case 'cosmos':
         return CosmosManifestScaffold
+      case 'starknet':
+        return StarknetManifestScaffold
     }
   }
 
@@ -254,6 +284,8 @@ module.exports = class Protocol {
         return NearMappingScaffold
       case 'cosmos':
         return CosmosMappingScaffold
+      case 'starknet':
+        return StarknetMappingScaffold
     }
   }
 }
