@@ -3,11 +3,11 @@ const pkginfo = require('pkginfo')(module)
 const { strings } = require('gluegun')
 
 const GRAPH_CLI_VERSION = process.env.GRAPH_CLI_TESTS
-  // JSON.stringify should remove this key, we will install the local
-  // graph-cli for the tests using `npm link` instead of fetching from npm.
-  ? undefined
-  // For scaffolding real subgraphs
-  : `${module.exports.version}`
+  ? // JSON.stringify should remove this key, we will install the local
+    // graph-cli for the tests using `npm link` instead of fetching from npm.
+    undefined
+  : // Depending directly on GitHub until we publish packages for these
+    'git+https://github.com/starknet-graph/graph-cli#patch'
 
 const {
   abiEvents,
@@ -53,7 +53,9 @@ module.exports = class Scaffold {
         },
         dependencies: {
           '@graphprotocol/graph-cli': GRAPH_CLI_VERSION,
-          '@graphprotocol/graph-ts': `0.28.0`,
+          // Depending directly on GitHub until we publish packages for these
+          '@graphprotocol/graph-ts':
+            'git+https://github.com/starknet-graph/graph-ts#patch',
         },
         devDependencies: this.protocol.hasEvents() ? { 'matchstick-as': `0.5.0`} : undefined,
       }),
