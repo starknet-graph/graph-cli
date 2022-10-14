@@ -29,6 +29,7 @@ type DataSource {
 
 type ContractSource {
   startBlock: BigInt
+  address: String
 }
 
 type ContractMapping {
