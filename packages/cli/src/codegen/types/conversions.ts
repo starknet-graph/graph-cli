@@ -266,6 +266,8 @@ const ASSEMBLYSCRIPT_TO_ETHEREUM_VALUE = [
   ],
 ];
 
+const ASSEMBLYSCRIPT_TO_STARKNET_VALUE = [['Bytes', 'felt', (code: string) => code]];
+
 /**
  * Value -> AssemblyScript conversions
  */
@@ -353,6 +355,7 @@ const CONVERSIONS = {
   },
   AssemblyScript: {
     ethereum: ASSEMBLYSCRIPT_TO_ETHEREUM_VALUE,
+    starknet: ASSEMBLYSCRIPT_TO_STARKNET_VALUE,
     Value: ASSEMBLYSCRIPT_TO_VALUE,
   },
   Value: {

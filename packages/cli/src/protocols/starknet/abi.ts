@@ -19,10 +19,7 @@ export default class ABI {
   }
 
   static eventSignature(event: immutable.Map<any, any>) {
-    return `${event.get('name')}(${event
-      .get('data', [])
-      .map((property: any) => property.get('type'))
-      .join(',')})`;
+    return event.get('name');
   }
 
   static normalized(json: any) {
@@ -41,6 +38,22 @@ export default class ABI {
   static load(name: string, file: string) {
     const data = JSON.parse(fs.readFileSync(file).toString());
     const abi = ABI.normalized(data);
+
+    // TODO: Decouple use of events from Ethereum ABI spec, maybe create
+    // an interface for AbiEvents that any protocol can implement.
+    //
+    // In multiple places graph-cli assumes events from the ABI implement Ethereum ABI spec,
+    // where event params are accesible at event.inputs. In Starknet event params are stored
+    // in event.data, so errors will be thrown.
+    //
+    // mutate so event params are accessed on event.inputs instead of event.data
+    abi.map((item: any) => {
+      if (item.type === 'event') {
+        item.inputs = item.data;
+      } else {
+        return item;
+      }
+    });
 
     if (abi === null || abi === undefined) {
       throw Error(`No valid ABI in file: ${path.relative(process.cwd(), file)}`);
