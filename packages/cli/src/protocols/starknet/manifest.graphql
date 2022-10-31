@@ -37,9 +37,15 @@ type ContractMapping {
   language: String!
   file: File!
   entities: [String!]!
+  abis: [ContractAbi!]!
   blockHandlers: [BlockHandler!]
   eventHandlers: [EventHandler!]
   transactionHandlers: [TransactionHandler!]
+}
+
+type ContractAbi {
+  name: String!
+  file: File!
 }
 
 type TransactionHandler {
