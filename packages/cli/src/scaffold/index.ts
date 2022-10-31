@@ -158,7 +158,7 @@ dataSources:
     const events = hasEvents ? abiEvents(this.abi!).toJS() : [];
 
     return events.length > 0
-      ? generateTestsFiles(this.contractName, events, this.indexEvents)
+      ? generateTestsFiles(this.contractName, events, this.protocol, this.indexEvents)
       : undefined;
   }
 
