@@ -23,11 +23,11 @@ const generateEventFields = ({ index, input, protocolName }) =>
         .map(({ path, type }) => generateField({ name: path.join('_'), type, protocolName }))
     : [generateField({ name: input.name || `param${index}`, type: input.type, protocolName })]
 
-const generateEventType = (event, protocolName) => `type ${event._alias} @entity {
+const generateEventType = (event, protocol) => `type ${event._alias} @entity {
       id: ID!
-      ${event.inputs
+      ${protocol.getEventParams(event)
         .reduce(
-          (acc, input, index) => acc.concat(generateEventFields({ input, index, protocolName })),
+          (acc, input, index) => acc.concat(generateEventFields({ input, index, protocolName: protocol.name })),
           [],
         )
         .join('\n')}
@@ -38,7 +38,7 @@ const generateExampleEntityType = (protocol, events) => {
       return `type ExampleEntity @entity {
   id: ID!
   count: BigInt!
-  ${events[0].inputs
+  ${protocol.getEventParams(events[0])
     .reduce((acc, input, index) => acc.concat(generateEventFields({ input, index, protocolName: protocol.name })), [])
     .slice(0, 2)
     .join('\n')}

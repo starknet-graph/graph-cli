@@ -84,6 +84,9 @@ const ethereumToAsc = (code, ethereumType, internalType) =>
     internalType,
   )
 
+const protocolFromAsc = (protocol, code, protocolType) =>
+    findConversionToType('AssemblyScript', protocol, protocolType).get('convert')(code)
+
 const ethereumFromAsc = (code, ethereumType) =>
   findConversionToType('AssemblyScript', 'ethereum', ethereumType).get('convert')(code)
 
@@ -102,6 +105,7 @@ const valueFromAsc = (code, valueType) =>
 module.exports = {
   // protocol <-> AssemblyScript
   ascTypeForProtocol,
+  protocolFromAsc,
 
   // ethereum <-> AssemblyScript
   ascTypeForEthereum,

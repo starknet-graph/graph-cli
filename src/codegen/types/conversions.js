@@ -320,6 +320,13 @@ const ASSEMBLYSCRIPT_TO_VALUE = [
 ]
 
 /**
+ * AssemblyScript -> starknet conversions
+ */
+ const ASSEMBLYSCRIPT_TO_STARKNET_VALUE = [
+  ['Bytes', 'felt', code => `${code}`],
+]
+
+/**
  * Type conversions
  */
 module.exports = immutable.fromJS({
@@ -329,6 +336,7 @@ module.exports = immutable.fromJS({
   AssemblyScript: {
     ethereum: ASSEMBLYSCRIPT_TO_ETHEREUM_VALUE,
     Value: ASSEMBLYSCRIPT_TO_VALUE,
+    starknet: ASSEMBLYSCRIPT_TO_STARKNET_VALUE,
   },
   Value: {
     AssemblyScript: VALUE_TO_ASSEMBLYSCRIPT,

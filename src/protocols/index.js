@@ -144,7 +144,7 @@ module.exports = class Protocol {
       case 'cosmos':
         return false
       case 'starknet':
-        return false
+        return true
     }
   }
 
@@ -159,7 +159,7 @@ module.exports = class Protocol {
       case 'cosmos':
         return false
       case 'starknet':
-        return false
+        return true
     }
   }
 
@@ -284,6 +284,22 @@ module.exports = class Protocol {
         return CosmosMappingScaffold
       case 'starknet':
         return StarknetMappingScaffold
+    }
+  }
+
+  // quick & dirty fix to replace tight coupling to ethereum abi spec for abi events
+  getEventParams(event) {
+    switch (this.name) {
+      case 'arweave':
+        return null
+      case 'ethereum':
+        return event.inputs
+      case 'near':
+        return null
+      case 'cosmos':
+        return null
+      case 'starknet':
+        return event.data
     }
   }
 }

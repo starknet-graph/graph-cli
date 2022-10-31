@@ -102,7 +102,7 @@ const writeSchema = async (abi, protocol, schemaPath, entities) => {
     : []
 
   let data = prettier.format(
-    events.map(event => generateEventType(event, protocol.name)).join('\n\n'),
+    events.map(event => generateEventType(event, protocol)).join('\n\n'),
     {
       parser: 'graphql',
     },

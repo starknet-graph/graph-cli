@@ -16,10 +16,7 @@ module.exports = class ABI {
   }
 
   static eventSignature(event) {
-    return `${event.get('name')}(${event
-      .get('data', [])
-      .map(property => property.get('type'))
-      .join(',')})`
+    return event.get('name');
   }
 
   static normalized(json) {

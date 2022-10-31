@@ -90,7 +90,7 @@ dataSources:
     return prettier.format(
       hasEvents && this.indexEvents
         ? events.map(
-            event => generateEventType(event, this.protocol.name)
+            event => generateEventType(event, this.protocol)
           )
             .join('\n\n')
         : generateExampleEntityType(this.protocol, events),
@@ -149,7 +149,7 @@ dataSources:
       : []
 
     return events.length > 0
-      ?  generateTestsFiles(this.contractName, events, this.indexEvents)
+      ?  generateTestsFiles(this.contractName, events, this.indexEvents, this.protocol)
       : undefined
   }
 

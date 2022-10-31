@@ -1,6 +1,6 @@
 const prettier = require('prettier')
 const { strings } = require('gluegun')
-const { ascTypeForEthereum, ethereumFromAsc } = require("../codegen/types")
+const { protocolFromAsc, ascTypeForProtocol } = require("../codegen/types")
 
 const VARIABLES_VALUES = {
   "i32": 123,
@@ -11,15 +11,14 @@ const VARIABLES_VALUES = {
   "bool": true,
 }
 
-const generateTestsFiles = (contract, events, indexEvents) => {
+const generateTestsFiles = (contract, events, indexEvents, protocol) => {
   const eventsTypes = events
     .flatMap(event =>
-      event
-        .inputs
+      protocol.getEventParams(event)
         .map(input => {
           // If the asc type is Array<T> we need to check if T is a native type or a custom graph-ts type
           // If we don't do that we may miss a type that should be imported from graph-ts
-          const ascType = ascTypeForEthereum(input.type)
+          const ascType = ascTypeForProtocol(protocol.name, input.type)
           const inner = fetchArrayInnerType(ascType)
           return inner ? inner[1] : ascType
         })
@@ -27,8 +26,8 @@ const generateTestsFiles = (contract, events, indexEvents) => {
   const importTypes = [...new Set(eventsTypes)].join(', ')
 
   return {
-    [`${strings.kebabCase(contract)}.test.ts`]: prettier.format(generateExampleTest(contract, events[0], indexEvents, importTypes), { parser: 'typescript', semi: false }),
-    [`${strings.kebabCase(contract)}-utils.ts`]: prettier.format(generateTestHelper(contract, events, importTypes), { parser: 'typescript', semi: false }),
+    [`${strings.kebabCase(contract)}.test.ts`]: prettier.format(generateExampleTest(contract, events[0], indexEvents, importTypes, protocol), { parser: 'typescript', semi: false }),
+    [`${strings.kebabCase(contract)}-utils.ts`]: prettier.format(generateTestHelper(contract, events, importTypes, protocol), { parser: 'typescript', semi: false }),
   }
 }
 
@@ -39,9 +38,9 @@ const generateTestsFiles = (contract, events, indexEvents) => {
   let displayName = "Example string value"
   let imageUrl = "Example string value"
 */
-const generateArguments = (eventInputs) => {
+const generateArguments = (eventInputs, protocol) => {
   return eventInputs.map((input, index) => {
-    let ascType = ascTypeForEthereum(input.type)
+    let ascType = ascTypeForProtocol(protocol.name, input.type)
     return `let ${input.name || `param${index}`} = ${assignValue(ascType, input.name)}`
   }).join('\n')
 }
@@ -75,12 +74,12 @@ const assignValue = (type) => {
     "0x0000000000000000000000000000000000000001"
   )
 */
-const generateFieldsAssertions = (entity, eventInputs, indexEvents) => eventInputs.filter(input => input.name != "id").map((input, index) =>
+const generateFieldsAssertions = (entity, eventInputs, indexEvents, protocol) => eventInputs.filter(input => input.name != "id").map((input, index) =>
   `assert.fieldEquals(
     "${entity}",
     "0xa16081f360e3847006db660bae1c6d1b2e17ec2a${indexEvents ? "-1" : ""}",
     "${input.name || `param${index}`}",
-    "${expectedValue(ascTypeForEthereum(input.type))}"
+    "${expectedValue(ascTypeForProtocol(protocol.name, input.type))}"
   )`
 ).join('\n')
 
@@ -110,9 +109,9 @@ const isNativeType = type => {
 const fetchArrayInnerType = type => type.match(/Array<(.*?)>/)
 
 // Generates the example test.ts file
-const generateExampleTest = (contract, event, indexEvents, importTypes) => {
+const generateExampleTest = (contract, event, indexEvents, importTypes, protocol) => {
   const entity = indexEvents ? `${event._alias}` : 'ExampleEntity'
-  const eventInputs = event.inputs
+  const eventInputs = protocol.getEventParams(event)
   const eventName = event._alias
 
   return `
@@ -129,7 +128,7 @@ const generateExampleTest = (contract, event, indexEvents, importTypes) => {
 
   describe("Describe entity assertions", () => {
     beforeAll(() => {
-      ${generateArguments(eventInputs)}
+      ${generateArguments(eventInputs, protocol)}
       let new${eventName}Event = create${eventName}Event(${eventInputs.map((input, index) => input.name || `param${index}`).join(', ')});
       handle${eventName}(new${eventName}Event)
     })
@@ -145,7 +144,7 @@ const generateExampleTest = (contract, event, indexEvents, importTypes) => {
       assert.entityCount('${entity}', 1)
 
       // 0xa16081f360e3847006db660bae1c6d1b2e17ec2a is the default address used in newMockEvent() function
-      ${generateFieldsAssertions(entity, eventInputs, indexEvents)}
+      ${generateFieldsAssertions(entity, eventInputs, indexEvents, protocol)}
 
       // More assert options:
       // https://thegraph.com/docs/en/developer/matchstick/#asserts
@@ -155,7 +154,7 @@ const generateExampleTest = (contract, event, indexEvents, importTypes) => {
 }
 
 // Generates the utils helper file
-const generateTestHelper = (contract, events, importTypes) => {
+const generateTestHelper = (contract, events, importTypes, protocol) => {
   const eventsNames = events.map(event => event._alias)
 
   return `
@@ -163,19 +162,19 @@ const generateTestHelper = (contract, events, importTypes) => {
   import { ethereum, ${importTypes} } from '@graphprotocol/graph-ts';
   import { ${eventsNames.join(", ")} } from '../generated/${contract}/${contract}';
 
-  ${generateMockedEvents(events).join("\n")}`
+  ${generateMockedEvents(events, protocol).join("\n")}`
 }
 
-const generateMockedEvents = events =>
+const generateMockedEvents = (events, protocol) =>
   events.reduce(
-    (acc, event) => acc.concat(generateMockedEvent(event)),
+    (acc, event) => acc.concat(generateMockedEvent(event, protocol)),
     [],
   )
 
-const generateMockedEvent = event => {
+const generateMockedEvent = (event, protocol) => {
   const varName = `${strings.camelCase(event._alias)}Event`
-  const fnArgs = event.inputs.map((input, index) => `${input.name || `param${index}`}: ${ascTypeForEthereum(input.type)}`);
-  const ascToEth = event.inputs.map((input, index) => `${varName}.parameters.push(new ethereum.EventParam("${input.name || `param${index}`}", ${ethereumFromAsc(input.name || `param${index}`, input.type)}))`);
+  const fnArgs = protocol.getEventParams(event).map((input, index) => `${input.name || `param${index}`}: ${ascTypeForProtocol(protocol.name, input.type)}`);
+  const ascToProtocol = protocol.getEventParams(event).map((input, index) => `${varName}.parameters.push(new ${protocol.name}.EventParam("${input.name || `param${index}`}", ${protocolFromAsc(protocol.name, input.name || `param${index}`, input.type)}))`);
 
   return `
     export function create${event._alias}Event(${fnArgs.join(', ')}): ${event._alias} {
@@ -183,7 +182,7 @@ const generateMockedEvent = event => {
 
       ${varName}.parameters = new Array();
 
-      ${ascToEth.join('\n')}
+      ${ascToProtocol.join('\n')}
 
       return ${varName};
     }
