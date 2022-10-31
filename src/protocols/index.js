@@ -10,6 +10,8 @@ const StarknetSubgraph = require('./starknet/subgraph')
 const EthereumContract = require('./ethereum/contract')
 const NearContract = require('./near/contract')
 const StarknetContract = require('./starknet/contract')
+const StarknetTypeGenerator = require('./starknet/type-generator')
+const StarknetABI = require('./starknet/abi')
 const EthereumManifestScaffold = require('./ethereum/scaffold/manifest')
 const NearManifestScaffold = require('./near/scaffold/manifest')
 const CosmosManifestScaffold = require('./cosmos/scaffold/manifest')
@@ -127,8 +129,7 @@ module.exports = class Protocol {
       case 'cosmos':
         return false
       case 'starknet':
-        // TODO: support ABI
-        return false
+        return true
     }
   }
 
@@ -143,7 +144,6 @@ module.exports = class Protocol {
       case 'cosmos':
         return false
       case 'starknet':
-        // TODO: support contracts
         return false
     }
   }
@@ -159,7 +159,6 @@ module.exports = class Protocol {
       case 'cosmos':
         return false
       case 'starknet':
-        // TODO: support events
         return false
     }
   }
@@ -175,7 +174,7 @@ module.exports = class Protocol {
       case 'cosmos':
         return false
       case 'starknet':
-        return true
+        return false
     }
   }
 
@@ -190,8 +189,7 @@ module.exports = class Protocol {
       case 'cosmos':
         return null
       case 'starknet':
-        // TODO: support type generation
-        return null
+        return new StarknetTypeGenerator(options)
     }
   }
 
@@ -221,7 +219,7 @@ module.exports = class Protocol {
       case 'cosmos':
         return null
       case 'starknet':
-        return null
+        return StarknetABI
     }
   }
 
