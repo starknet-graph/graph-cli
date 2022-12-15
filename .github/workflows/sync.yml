@@ -50,8 +50,8 @@ jobs:
             git cherry-pick origin/$DEFAULT_BRANCH~$(($COMMIT_COUNT-1))..origin/$DEFAULT_BRANCH
 
             # Makes sure the updated local branch builds
-            yarn install
-            yarn test
+            pnpm install
+            yarn test:cli
 
             # Push updated branch
             git push --force-with-lease
