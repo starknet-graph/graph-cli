@@ -1,32 +1,32 @@
 on:
   schedule:
     # 1:05 past midnight UTC
-    - cron: "5 1 * * *"
+    - cron: '5 1 * * *'
 
-name: "Sync with upstream"
+name: 'Sync with upstream'
 jobs:
   sync:
-    name: "Sync"
-    runs-on: "ubuntu-latest"
+    name: 'Sync'
+    runs-on: 'ubuntu-latest'
 
     env:
-      DEFAULT_BRANCH: "main"
+      DEFAULT_BRANCH: 'main'
 
     steps:
-      - name: "Checkout source code"
-        uses: "actions/checkout@v3"
+      - name: 'Checkout source code'
+        uses: 'actions/checkout@v3'
         with:
           # Subsequent actions are not triggered unless using PAT
-          token: "${{ secrets.GH_PAT }}"
+          token: '${{ secrets.GH_PAT }}'
           fetch-depth: 0
           submodules: true
 
-      - name: "Config Git"
+      - name: 'Config Git'
         run: |
           git config --global user.name "Jonathan LEI"
           git config --global user.email "me@xjonathan.dev"
 
-      - name: "Update branch"
+      - name: 'Update branch'
         run: |
           git fetch origin
           git remote add upstream https://github.com/graphprotocol/graph-cli
