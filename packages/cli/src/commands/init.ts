@@ -66,6 +66,11 @@ ${chalk.dim.underline('Cosmos:')}
 
       --network <${availableNetworks.get('cosmos')!.join('|')}>
                                  Selects the network the contract is deployed to
+
+${chalk.dim.underline('StarkNet:')}
+
+      --network <${availableNetworks.get('starknet')!.join('|')}>
+                                 Selects the network the contract is deployed to
 `;
 
 const processInitForm = async (
@@ -145,6 +150,7 @@ const processInitForm = async (
         protocol === 'arweave' ||
         protocol === 'cosmos' ||
         protocol === 'near' ||
+        protocol === 'starknet' ||
         product === 'subgraph-studio' ||
         product === 'hosted-service' ||
         studio !== undefined ||
