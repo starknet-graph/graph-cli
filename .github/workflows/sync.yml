@@ -75,6 +75,10 @@ jobs:
           git checkout $DEFAULT_BRANCH
           git reset --hard upstream/$DEFAULT_BRANCH
           git checkout origin/home .
+
+          # We don't want the upstream Release workflow
+          rm .github/workflows/release.yml
+
           git add .
           git commit -m "chore: README and CI changes"
 
