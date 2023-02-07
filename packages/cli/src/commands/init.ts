@@ -625,7 +625,7 @@ const initRepository = async (toolbox: GluegunToolbox, directory: string) =>
 // https://docs.npmjs.com/cli/v7/commands/npm-link.
 const npmLinkToLocalCli = async (toolbox: GluegunToolbox, directory: string) => {
   if (process.env.GRAPH_CLI_TESTS) {
-    await toolbox.system.run('npm link @graphprotocol/graph-cli', { cwd: directory });
+    await toolbox.system.run('npm link @starknet-graph/graph-cli', { cwd: directory });
   }
 };
 
@@ -745,7 +745,7 @@ const initSubgraphFromExample = async (
       const tmpDir = fs.mkdtempSync(prefix);
 
       try {
-        await system.run(`git clone http://github.com/graphprotocol/example-subgraphs ${tmpDir}`);
+        await system.run(`git clone http://github.com/starknet-graph/example-subgraphs ${tmpDir}`);
 
         // If an example is not specified, use the default one
         if (fromExample === undefined || fromExample === true) {
@@ -812,7 +812,7 @@ const initSubgraphFromExample = async (
 
         // Remove example's cli in favor of the local one (added via `npm link`)
         if (process.env.GRAPH_CLI_TESTS) {
-          delete pkgJson['devDependencies']['@graphprotocol/graph-cli'];
+          delete pkgJson['devDependencies']['@starknet-graph/graph-cli'];
         }
 
         // Write package.json

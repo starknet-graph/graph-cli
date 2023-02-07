@@ -69,8 +69,8 @@ export default class Scaffold {
           test: 'graph test',
         },
         dependencies: {
-          '@graphprotocol/graph-cli': GRAPH_CLI_VERSION,
-          '@graphprotocol/graph-ts': `0.29.1`,
+          '@starknet-graph/graph-cli': GRAPH_CLI_VERSION,
+          '@starknet-graph/graph-ts': `0.29.1`,
         },
         devDependencies: this.protocol.hasEvents() ? { 'matchstick-as': `0.5.0` } : undefined,
       }),
@@ -114,7 +114,7 @@ dataSources:
   generateTsConfig() {
     return prettier.format(
       JSON.stringify({
-        extends: '@graphprotocol/graph-ts/types/tsconfig.base.json',
+        extends: '@starknet-graph/graph-ts/types/tsconfig.base.json',
         include: ['src'],
       }),
       { parser: 'json' },

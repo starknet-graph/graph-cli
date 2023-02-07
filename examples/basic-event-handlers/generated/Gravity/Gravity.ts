@@ -8,7 +8,7 @@ import {
   Bytes,
   Address,
   BigInt
-} from "@graphprotocol/graph-ts";
+} from "@starknet-graph/graph-ts";
 
 export class NewGravatar extends ethereum.Event {
   get params(): NewGravatar__Params {

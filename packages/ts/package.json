@@ -1,5 +1,5 @@
 {
-  "name": "@graphprotocol/graph-ts",
+  "name": "@starknet-graph/graph-ts",
   "version": "0.29.3",
   "description": "TypeScript/AssemblyScript library for writing subgraph mappings for The Graph",
   "main": "index.ts",

@@ -18,7 +18,7 @@ const run = async (argv: string[]) => {
 
   // Inject potential plugin directories
   builder = pluginDirs.reduce(
-    (cli, dir) => cli.plugin(path.join(dir, '@graphprotocol', 'indexer-cli', 'dist')),
+    (cli, dir) => cli.plugin(path.join(dir, '@starknet-graph', 'indexer-cli', 'dist')),
     builder,
   );
 

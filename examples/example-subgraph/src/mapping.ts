@@ -1,4 +1,4 @@
-import { Address, BigInt, Bytes, crypto, Entity, log, store } from '@graphprotocol/graph-ts';
+import { Address, BigInt, Bytes, crypto, Entity, log, store } from '@starknet-graph/graph-ts';
 import { ExampleContract, ExampleEvent } from './../generated/ExampleSubgraph/ExampleContract';
 import { ExampleEntity } from './../generated/schema';
 
