@@ -63,13 +63,13 @@ jobs:
           git config --global user.name "Jonathan LEI"
           git config --global user.email "me@xjonathan.dev"
 
-      - name: 'Update branch'
+      - name: 'Update branch (home branch)'
         run: |
           git fetch origin
           git remote add upstream https://github.com/graphprotocol/graph-cli
           git fetch upstream --no-tags
 
-          MERGE_BASE=$(git merge-base origin/$DEFAULT_BRANCH upstream/$DEFAULT_BRANCH)
+          echo "MERGE_BASE=$(git merge-base origin/$DEFAULT_BRANCH upstream/$DEFAULT_BRANCH)" >> $GITHUB_ENV
 
           # Brings files from `home` to default branch
           git checkout $DEFAULT_BRANCH
@@ -82,11 +82,20 @@ jobs:
           git add .
           git commit -m "chore: README and CI changes"
 
-          # Here, we pick commits on the default branch except the first one. We do this instead
-          # of a naive rebase because the `home` branch might have changed, causing merge
-          # conflicts.
+      - name: 'Update branch (rename package)'
+        run: |
+          find . -type f ! -name "*.md" ! -path "./.git/*" ! -path "./.github/*" -exec sed -i "s/@graphprotocol/@starknet-graph/g" {} \;
+          find . -type f ! -name "*.md" ! -path "./.git/*" ! -path "./.github/*" -exec sed -i "s/github.com\/graphprotocol/github.com\/starknet-graph/g" {} \;
+
+          git add .
+          git commit -m "chore: rename packages"
+
+      - name: 'Update branch (rebase)'
+        run: |
+          # Here, we pick commits on the default branch except the first two. We do this instead
+          # of a naive rebase to avoid conflicts.
           COMMIT_COUNT=$(git rev-list $MERGE_BASE..origin/$DEFAULT_BRANCH | wc -l)
-          git cherry-pick origin/$DEFAULT_BRANCH~$(($COMMIT_COUNT-1))..origin/$DEFAULT_BRANCH
+          git cherry-pick origin/$DEFAULT_BRANCH~$(($COMMIT_COUNT-2))..origin/$DEFAULT_BRANCH
 
       - name: 'Install dependencies'
         run: |
