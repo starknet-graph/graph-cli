@@ -1,15 +1,15 @@
-# `graph-cli` Fork with StarkNet Support
+# `graph-tooling` Fork with Starknet Support
 
-This is a [`graph-cli`](https://github.com/graphprotocol/graph-cli) fork with support for
-[StarkNet](https://starknet.io/). It's created and maintained by the [zkLend](https://zklend.com/)
+This is a [`graph-tooling`](https://github.com/graphprotocol/graph-tooling) fork with support for
+[Starknet](https://starknet.io/). It's created and maintained by the [zkLend](https://zklend.com/)
 team.
 
 Powered by a
-[GitHub Actions workflow](https://github.com/starknet-graph/graph-cli/actions/workflows/sync.yml),
+[GitHub Actions workflow](https://github.com/starknet-graph/graph-tooling/actions/workflows/sync.yml),
 this fork syncs the `main` branch with the upstream continuously:
 
 - First, a commit is made on top of the upstream `main` branch to bring files from the
-  [`home`](https://github.com/starknet-graph/graph-cli/tree/home) branch to `main`. This is
+  [`home`](https://github.com/starknet-graph/graph-tooling/tree/home) branch to `main`. This is
   necessary for making changes to CI workflows and the README file you're reading right now.
 
 - Then, actual patch commits living on the fork `main` branch gets rebased. Before pushing, the
@@ -20,16 +20,8 @@ the patch applied.
 
 ## Installing
 
-We don't currently publish our fork to npm until the code matures enough. To install the patched
-`graph-cli`, you must install directly from GitHub:
+Install the patched `graph` CLI from npm with:
 
 ```console
-$ yarn global add git+https://github.com/starknet-graph/graph-cli#patch
-```
-
-Due to the constant rebasing, commit hashes can change in a non-fast-forward way. If installation
-fails, retry after running:
-
-```console
-$ yarn cache clean
+$ yarn global add @starknet-graph/graph-cli
 ```
