@@ -110,7 +110,10 @@ const ETHEREUM_VALUE_TO_ASSEMBLYSCRIPT = [
 /**
  * starknet -> AssemblyScript conversions
  */
-const STARKNET_VALUE_TO_ASSEMBLYSCRIPT = [['felt', 'Bytes', (code: string) => code]];
+const STARKNET_VALUE_TO_ASSEMBLYSCRIPT = [
+  ['felt', 'Felt', (code: string) => code],
+  ['Uint256', 'BigInt', (code: string) => code],
+];
 
 /**
  * AssemblyScript -> ethereum.Value conversions
@@ -266,7 +269,10 @@ const ASSEMBLYSCRIPT_TO_ETHEREUM_VALUE = [
   ],
 ];
 
-const ASSEMBLYSCRIPT_TO_STARKNET_VALUE = [['Bytes', 'felt', (code: string) => code]];
+const ASSEMBLYSCRIPT_TO_STARKNET_VALUE = [
+  ['Felt', 'felt', (code: string) => code],
+  ['Felt', 'Uint256', (code: string) => code],
+];
 
 /**
  * Value -> AssemblyScript conversions
@@ -344,6 +350,9 @@ const ASSEMBLYSCRIPT_TO_VALUE = [
   ['string', 'ID', (code: any) => `Value.fromString(${code})`],
   ['BigDecimal', 'BigDecimal', (code: any) => `Value.fromBigDecimal(${code})`],
   ['string', /.*/, (code: any) => `Value.fromString(${code})`],
+
+  // Starknet custom types
+  ['Felt', 'Bytes', (code: any) => code],
 ];
 
 const CONVERSIONS = {

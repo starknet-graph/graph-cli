@@ -198,7 +198,7 @@ const generateTestHelper = (
 
   return `
   import { newMockEvent } from 'matchstick-as';
-  import { ethereum, ${importTypes} } from '@starknet-graph/graph-ts';
+  import { ${protocol.name}, ${importTypes} } from '@starknet-graph/graph-ts';
   import { ${eventsNames.join(', ')} } from '../generated/${contract}/${contract}';
 
   ${generateMockedEvents(events, protocol).join('\n')}`;

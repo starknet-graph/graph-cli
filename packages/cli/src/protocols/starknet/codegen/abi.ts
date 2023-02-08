@@ -9,7 +9,7 @@ export default class AbiCodeGenerator {
   }
 
   generateModuleImports() {
-    return [tsCodegen.moduleImports(['starknet', 'Bytes'], '@starknet-graph/graph-ts')];
+    return [tsCodegen.moduleImports(['starknet', 'BigInt', 'Felt'], '@starknet-graph/graph-ts')];
   }
 
   generateTypes() {
@@ -52,14 +52,10 @@ export default class AbiCodeGenerator {
         setName: (property, name) => property.set('name', name),
       }) as any[];
 
-      eventProperties.forEach((property, index) => {
-        // Generate getters for event data
-        // Only support getter for felt => Bytes
-        if (property.get('type') !== 'felt') {
-          return;
-        }
-
-        const paramObject = this._generateEventGetter(property, index);
+      let eventDataSlot = 0;
+      eventProperties.forEach(property => {
+        const [paramObject, consumed] = this._generateEventGetter(property, eventDataSlot);
+        eventDataSlot += consumed;
         paramsClass.addMethod(paramObject.getter);
       });
 
@@ -87,22 +83,37 @@ export default class AbiCodeGenerator {
     );
   }
 
-  _generateEventGetter(event: any, index: number) {
+  _generateEventGetter(event: any, index: number): [any, number] {
     // Get name and type of the param, adjusting for indexed params and missing names
     const name = event.get('name');
     const valueType = event.get('type');
 
-    // Only felts -> Bytes is supported
-    // Generate getters for the param
-    return {
-      name: [],
-      getter: tsCodegen.method(
-        `get ${name}`,
-        [],
-        typesCodegen.ascTypeForProtocol('starknet', valueType),
-        `return this._event.data[${index}]`,
-      ),
-      classes: [],
-    };
+    let code: string;
+    let consumed: number;
+    if (valueType === 'Uint256') {
+      code =
+        `return changetype<Felt>(this._event.data[${index + 1}].slice())` +
+        `.intoBigInt()` +
+        `.leftShift(128)` +
+        `.plus(changetype<Felt>(this._event.data[${index}].slice()).intoBigInt())`;
+      consumed = 2;
+    } else {
+      code = `return changetype<Felt>(this._event.data[${index}])`;
+      consumed = 1;
+    }
+
+    return [
+      {
+        name: [],
+        getter: tsCodegen.method(
+          `get ${name}`,
+          [],
+          typesCodegen.ascTypeForProtocol('starknet', valueType),
+          code,
+        ),
+        classes: [],
+      },
+      consumed,
+    ];
   }
 }
