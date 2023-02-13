@@ -180,7 +180,7 @@ export const writeTestsFiles = async (abi: ABI, protocol: Protocol, contractName
     // If a contract is added to a subgraph that has no tests folder
     await fs.ensureDir('./tests/');
 
-    const testsFiles = generateTestsFiles(contractName, events, true);
+    const testsFiles = generateTestsFiles(contractName, events, protocol, true);
 
     for (const [fileName, content] of Object.entries(testsFiles)) {
       await fs.writeFile(`./tests/${fileName}`, content, 'utf-8');
