@@ -80,6 +80,9 @@ const findConversionToType = (
 export const ascTypeForProtocol = (protocol: string, protocolType: string) =>
   findConversionFromType(protocol, 'AssemblyScript', protocolType).getIn(['to', 'type']) as string;
 
+export const protocolFromAsc = (protocol: string, code: string, protocolType: string) =>
+  findConversionToType('AssemblyScript', protocol, protocolType).get('convert')(code);
+
 // TODO: this can be removed/replaced by the function above
 export const ascTypeForEthereum = (ethereumType: string) =>
   ascTypeForProtocol('ethereum', ethereumType);
