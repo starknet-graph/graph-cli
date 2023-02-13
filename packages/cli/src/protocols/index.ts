@@ -19,10 +19,12 @@ import NearContract from './near/contract';
 import * as NearManifestScaffold from './near/scaffold/manifest';
 import * as NearMappingScaffold from './near/scaffold/mapping';
 import NearSubgraph from './near/subgraph';
+import StarknetABI from './starknet/abi';
 import StarknetContract from './starknet/contract';
 import * as StarknetManifestScaffold from './starknet/scaffold/manifest';
 import * as StarknetMappingScaffold from './starknet/scaffold/mapping';
 import StarknetSubgraph from './starknet/subgraph';
+import StarknetTypeGenerator from './starknet/type-generator';
 import { SubgraphOptions } from './subgraph';
 import * as SubstreamsManifestScaffold from './substreams/scaffold/manifest';
 import SubstreamsSubgraph from './substreams/subgraph';
@@ -300,9 +302,11 @@ const substreamsProtocol: ProtocolConfig = {
 
 const starknetProtocol: ProtocolConfig = {
   displayName: 'StarkNet',
-  abi: undefined,
+  abi: StarknetABI,
   contract: StarknetContract,
-  getTypeGenerator: undefined,
+  getTypeGenerator(options) {
+    return new StarknetTypeGenerator(options);
+  },
   getTemplateCodeGen: undefined,
   getSubgraph(options) {
     return new StarknetSubgraph(options);
