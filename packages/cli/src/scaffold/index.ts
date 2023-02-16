@@ -70,7 +70,7 @@ export default class Scaffold {
         },
         dependencies: {
           '@starknet-graph/graph-cli': GRAPH_CLI_VERSION,
-          '@starknet-graph/graph-ts': `0.29.1`,
+          '@starknet-graph/graph-ts': `0.29.3-3`,
         },
         devDependencies: this.protocol.hasEvents() ? { 'matchstick-as': `0.5.0` } : undefined,
       }),
