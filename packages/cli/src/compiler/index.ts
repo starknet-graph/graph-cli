@@ -58,14 +58,14 @@ export default class Compiler {
         throw Error(`could not locate \`node_modules\` in parent directories of subgraph manifest`);
       }
 
-      const globalsFile = path.join('@graphprotocol', 'graph-ts', 'global', 'global.ts');
+      const globalsFile = path.join('@starknet-graph', 'graph-ts', 'global', 'global.ts');
       const globalsLib = this.libsDirs.find(item => {
         return fs.existsSync(path.join(item, globalsFile));
       });
 
       if (!globalsLib) {
         throw Error(
-          'Could not locate `@graphprotocol/graph-ts` package in parent directories of subgraph manifest.',
+          'Could not locate `@starknet-graph/graph-ts` package in parent directories of subgraph manifest.',
         );
       }
 

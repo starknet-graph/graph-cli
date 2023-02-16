@@ -11,7 +11,7 @@ export const generatePlaceholderHandlers = ({
   contractName: string;
 }) =>
   `
-  import { BigInt } from '@graphprotocol/graph-ts'
+  import { BigInt } from '@starknet-graph/graph-ts'
   import { ${contractName}, ${events.map(event => event._alias)} }
     from '../generated/${contractName}/${contractName}'
   import { ExampleEntity } from '../generated/schema'

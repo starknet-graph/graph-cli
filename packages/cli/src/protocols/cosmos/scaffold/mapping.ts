@@ -1,6 +1,6 @@
 export const generatePlaceholderHandlers = () =>
   `
-  import { cosmos, BigInt } from '@graphprotocol/graph-ts'
+  import { cosmos, BigInt } from '@starknet-graph/graph-ts'
   import { ExampleEntity } from '../generated/schema'
 
   export function handleBlock(block: cosmos.Block): void {

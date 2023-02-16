@@ -2,11 +2,11 @@
   "name": "graphprotocol-tools-monorepo",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/graphprotocol/graph-cli"
+    "url": "git+https://github.com/starknet-graph/graph-cli"
   },
-  "homepage": "https://github.com/graphprotocol/graph-cli#readme",
+  "homepage": "https://github.com/starknet-graph/graph-cli#readme",
   "bugs": {
-    "url": "https://github.com/graphprotocol/graph-cli/issues"
+    "url": "https://github.com/starknet-graph/graph-cli/issues"
   },
   "license": "(Apache-2.0 OR MIT)",
   "private": true,
@@ -14,14 +14,14 @@
     "pnpm": ">=7.14.2"
   },
   "scripts": {
-    "build": "pnpm --filter=@graphprotocol/graph-* build",
+    "build": "pnpm --filter=@starknet-graph/graph-* build",
     "lint": "pnpm lint:prettier && pnpm lint:eslint",
     "lint:eslint": "eslint .",
     "lint:prettier": "prettier -c .",
     "release": "pnpm build && changeset publish",
-    "test:cli": "pnpm --filter @graphprotocol/graph-cli test",
-    "test:ts": "pnpm --filter @graphprotocol/graph-ts test",
-    "type-check": "pnpm --filter=@graphprotocol/graph-cli type-check"
+    "test:cli": "pnpm --filter @starknet-graph/graph-cli test",
+    "test:ts": "pnpm --filter @starknet-graph/graph-ts test",
+    "type-check": "pnpm --filter=@starknet-graph/graph-cli type-check"
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
