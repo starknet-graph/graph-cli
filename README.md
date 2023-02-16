@@ -1,57 +1,27 @@
-# The Graph Tooling
+# `graph-tooling` Fork with Starknet Support
 
-Monorepo for various tools used by subgraph developers.
+This is a [`graph-tooling`](https://github.com/graphprotocol/graph-tooling) fork with support for
+[Starknet](https://starknet.io/). It's created and maintained by the [zkLend](https://zklend.com/)
+team.
 
-This repository houses the following tools:
+Powered by a
+[GitHub Actions workflow](https://github.com/starknet-graph/graph-tooling/actions/workflows/sync.yml),
+this fork syncs the `main` branch with the upstream continuously:
 
-<!-- prettier-ignore-start -->
-| NPM | Name | 
-| --- | --- | 
-|[![npm (scoped)](https://img.shields.io/npm/v/@graphprotocol/graph-cli.svg?color=success)](https://www.npmjs.com/package/@graphprotocol/graph-cli)| [`@graphprotocol/graph-cli`](./packages/cli) |
-[![npm (scoped)](https://img.shields.io/npm/v/@graphprotocol/graph-ts.svg?color=success)](https://www.npmjs.com/package/@graphprotocol/graph-ts)|[`@graphprotocol/graph-ts`](./packages/ts)|
+- First, a commit is made on top of the upstream `main` branch to bring files from the
+  [`home`](https://github.com/starknet-graph/graph-tooling/tree/home) branch to `main`. This is
+  necessary for making changes to CI workflows and the README file you're reading right now.
 
-<!-- prettier-ignore-end -->
+- Then, actual patch commits living on the fork `main` branch gets rebased. Before pushing, the
+  branch is compiled to make sure it still builds, and the team gets notified if it doesn't.
 
-## Release process
+Whenever a version is released on the upstream project, we will make the same release except with
+the patch applied.
 
-We use `changeset` to manage releases. Every PR should include a changeset file. The release process
-is as follows:
+## Installing
 
-1. Author creates the PR with changes and runs `pnpm changeset` to create a changeset file to
-   summarize the changes.
-2. When the PR is merged to `main`, a Github Action will run and create a PR with the version bump
-   and changelog.
-3. We will merge the bot generated PR to `main`.
-4. A Github Action will run and publish the new version to npm.
+Install the patched `graph` CLI from npm with:
 
-Helpful links:
-
-- [Semver official docs](https://semver.org/)
-- [Changesets](https://github.com/changesets/changesets)
-- [Snapshot release](https://github.com/changesets/changesets/blob/main/docs/snapshot-releases.md)
-
-### Stable release example
-
-When PRs are merged and to `main` we can choose to merge the bot generated changeset PR to `main`
-and it will publish a new version to npm.
-
-Example of a `graph-client` release: https://github.com/graphprotocol/graph-client/pull/295
-
-### Alpha release example
-
-Every PR to `main` that includes a changeset file will create a new alpha version.
-
-Example of `graph-client` snapshot release:
-https://github.com/graphprotocol/graph-client/pull/178#issuecomment-1214822036
-
-## License
-
-Copyright &copy; 2018-2019 Graph Protocol, Inc. and contributors.
-
-The Graph CLI is dual-licensed under the [MIT license](LICENSE-MIT) and the
-[Apache License, Version 2.0](LICENSE-APACHE).
-
-Unless required by applicable law or agreed to in writing, software distributed under the License is
-distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either expressed or
-implied. See the License for the specific language governing permissions and limitations under the
-License.
+```console
+$ yarn global add @starknet-graph/graph-cli
+```
