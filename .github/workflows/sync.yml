@@ -91,6 +91,7 @@ jobs:
 
           find . -type f ! -name "*.md" ! -path "./.git/*" ! -path "./.github/*" ! -path "./node_modules/*" -exec sed -i "s/@graphprotocol/@starknet-graph/g" {} \;
           find . -type f ! -name "*.md" ! -path "./.git/*" ! -path "./.github/*" ! -path "./node_modules/*" -exec sed -i "s/github.com\/graphprotocol/github.com\/starknet-graph/g" {} \;
+          find . -type f ! -name "*.md" ! -path "./.git/*" ! -path "./.github/*" ! -path "./node_modules/*" -exec sed -i "s/github\\\\.com\\\\\/graphprotocol/github\\\\\\.com\\\\\/starknet-graph/g" {} \;
 
           yarn prettier --write .
           git clean -dfx
