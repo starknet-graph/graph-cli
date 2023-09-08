@@ -107,6 +107,7 @@ export default class InitCommand extends Command {
         ...availableNetworks.get('ethereum')!,
         ...availableNetworks.get('near')!,
         ...availableNetworks.get('cosmos')!,
+        ...availableNetworks.get('starknet')!,
       ],
     }),
   };
@@ -476,6 +477,7 @@ async function processInitForm(
           protocol === 'arweave' ||
           protocol === 'cosmos' ||
           protocol === 'near' ||
+          protocol === 'starknet' ||
           initProduct === 'subgraph-studio' ||
           initProduct === 'hosted-service' ||
           initStudio !== undefined ||

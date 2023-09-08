@@ -19,6 +19,10 @@ import NearContract from './near/contract';
 import * as NearManifestScaffold from './near/scaffold/manifest';
 import * as NearMappingScaffold from './near/scaffold/mapping';
 import NearSubgraph from './near/subgraph';
+import StarknetContract from './starknet/contract';
+import * as StarknetManifestScaffold from './starknet/scaffold/manifest';
+import * as StarknetMappingScaffold from './starknet/scaffold/mapping';
+import StarknetSubgraph from './starknet/subgraph';
 import { SubgraphOptions } from './subgraph';
 import * as SubstreamsManifestScaffold from './substreams/scaffold/manifest';
 import SubstreamsSubgraph from './substreams/subgraph';
@@ -55,6 +59,9 @@ export default class Protocol {
       case 'substreams':
         this.config = substreamsProtocol;
         break;
+      case 'starknet':
+        this.config = starknetProtocol;
+        break;
       default:
       // Do not throw when undefined, a better error message is printed after the constructor
       // when validating the Subgraph itself
@@ -70,6 +77,7 @@ export default class Protocol {
       near: ['near'],
       cosmos: ['cosmos'],
       substreams: ['substreams'],
+      starknet: ['starknet'],
     }) as immutable.Collection<ProtocolName, string[]>;
   }
 
@@ -123,8 +131,9 @@ export default class Protocol {
         'uni-3', // Juno testnet
       ],
       substreams: ['mainnet'],
+      starknet: ['starknet-mainnet', 'starknet-goerli'],
     }) as immutable.Map<
-      'arweave' | 'ethereum' | 'near' | 'cosmos' | 'substreams',
+      'arweave' | 'ethereum' | 'near' | 'cosmos' | 'substreams' | 'starknet',
       immutable.List<string>
     >;
   }
@@ -205,7 +214,7 @@ export default class Protocol {
   }
 }
 
-export type ProtocolName = 'arweave' | 'ethereum' | 'near' | 'cosmos' | 'substreams';
+export type ProtocolName = 'arweave' | 'ethereum' | 'near' | 'cosmos' | 'substreams' | 'starknet';
 
 export interface ProtocolConfig {
   displayName: string;
@@ -285,6 +294,19 @@ const substreamsProtocol: ProtocolConfig = {
   },
   manifestScaffold: SubstreamsManifestScaffold,
   mappingScaffold: undefined,
+};
+
+const starknetProtocol: ProtocolConfig = {
+  displayName: 'StarkNet',
+  abi: undefined,
+  contract: StarknetContract,
+  getTypeGenerator: undefined,
+  getTemplateCodeGen: undefined,
+  getSubgraph(options) {
+    return new StarknetSubgraph(options);
+  },
+  manifestScaffold: StarknetManifestScaffold,
+  mappingScaffold: StarknetMappingScaffold,
 };
 
 protocolDebug('Available networks %M', Protocol.availableNetworks());
