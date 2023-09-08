@@ -85,8 +85,15 @@ jobs:
 
       - name: 'Update branch (rename package)'
         run: |
-          find . -type f ! -name "*.md" ! -path "./.git/*" ! -path "./.github/*" -exec sed -i "s/@graphprotocol/@starknet-graph/g" {} \;
-          find . -type f ! -name "*.md" ! -path "./.git/*" ! -path "./.github/*" -exec sed -i "s/github.com\/graphprotocol/github.com\/starknet-graph/g" {} \;
+          # We need to do this because the project enforces dependency sorting
+          pnpm i
+          git reset --hard
+
+          find . -type f ! -name "*.md" ! -path "./.git/*" ! -path "./.github/*" ! -path "./node_modules/*" -exec sed -i "s/@graphprotocol/@starknet-graph/g" {} \;
+          find . -type f ! -name "*.md" ! -path "./.git/*" ! -path "./.github/*" ! -path "./node_modules/*" -exec sed -i "s/github.com\/graphprotocol/github.com\/starknet-graph/g" {} \;
+
+          yarn prettier --write .
+          git clean -dfx
 
           git add .
           git commit -m "chore: rename packages"
