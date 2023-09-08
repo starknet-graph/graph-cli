@@ -159,7 +159,7 @@ export default class InitCommand extends Command {
     }
 
     const commands = {
-      link: yarn ? 'yarn link @graphprotocol/graph-cli' : 'npm link @graphprotocol/graph-cli',
+      link: yarn ? 'yarn link @starknet-graph/graph-cli' : 'npm link @starknet-graph/graph-cli',
       install: yarn ? 'yarn' : 'npm install',
       codegen: yarn ? 'yarn codegen' : 'npm run codegen',
       deploy: yarn ? 'yarn deploy' : 'npm run deploy',
@@ -824,7 +824,7 @@ async function initSubgraphFromExample(
       const tmpDir = fs.mkdtempSync(prefix);
 
       try {
-        await system.run(`git clone https://github.com/graphprotocol/graph-tooling ${tmpDir}`);
+        await system.run(`git clone https://github.com/starknet-graph/graph-tooling ${tmpDir}`);
 
         // If an example is not specified, use the default one
         if (fromExample === undefined || fromExample === true) {
@@ -892,7 +892,7 @@ async function initSubgraphFromExample(
 
         // Remove example's cli in favor of the local one (added via `npm link`)
         if (process.env.GRAPH_CLI_TESTS) {
-          delete pkgJson['devDependencies']['@graphprotocol/graph-cli'];
+          delete pkgJson['devDependencies']['@starknet-graph/graph-cli'];
         }
 
         // Write package.json

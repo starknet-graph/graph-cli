@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/graphprotocol/graph-tooling",
+    "url": "https://github.com/starknet-graph/graph-tooling",
     "directory": "examples/ethereum-basic-event-handlers"
   },
   "private": true,
@@ -31,9 +31,9 @@
     "typescript": "^5.0.4"
   },
   "devDependencies": {
-    "@graphprotocol/graph-cli": "0.51.0",
-    "@graphprotocol/graph-ts": "0.31.0",
     "@nomicfoundation/hardhat-toolbox": "^2.0.2",
+    "@starknet-graph/graph-cli": "0.51.0",
+    "@starknet-graph/graph-ts": "0.31.0",
     "apollo-fetch": "^0.7.0",
     "hardhat": "^2.13.1"
   }

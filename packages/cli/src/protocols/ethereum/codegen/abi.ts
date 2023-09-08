@@ -33,7 +33,7 @@ export default class AbiCodeGenerator {
           'Address',
           'BigInt',
         ],
-        '@graphprotocol/graph-ts',
+        '@starknet-graph/graph-ts',
       ),
     ];
 

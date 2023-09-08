@@ -9,7 +9,7 @@ import {
   Bytes,
   BigInt,
   BigDecimal,
-} from '@graphprotocol/graph-ts';
+} from '@starknet-graph/graph-ts';
 
 export class ExampleEntity extends Entity {
   constructor(id: string) {

@@ -153,7 +153,7 @@ type ExampleEvent1 @entity(immutable: true) {
 
   test('Mapping (default)', () => {
     expect(scaffold.generateMapping()).toEqual(`\
-import { BigInt } from "@graphprotocol/graph-ts"
+import { BigInt } from "@starknet-graph/graph-ts"
 import {
   Contract,
   ExampleEvent,
@@ -266,7 +266,7 @@ import {
   beforeAll,
   afterAll
 } from "matchstick-as/assembly/index"
-import { BigInt, Bytes } from "@graphprotocol/graph-ts"
+import { BigInt, Bytes } from "@starknet-graph/graph-ts"
 import { ExampleEvent } from "../generated/schema"
 import { ExampleEvent as ExampleEventEvent } from "../generated/Contract/Contract"
 import { handleExampleEvent } from "../src/contract"
@@ -335,7 +335,7 @@ describe("Describe entity assertions", () => {
 `);
     expect(utilsFile).toEqual(`\
 import { newMockEvent } from "matchstick-as"
-import { ethereum, BigInt, Bytes } from "@graphprotocol/graph-ts"
+import { ethereum, BigInt, Bytes } from "@starknet-graph/graph-ts"
 import { ExampleEvent, ExampleEvent1 } from "../generated/Contract/Contract"
 
 export function createExampleEventEvent(
@@ -396,7 +396,7 @@ import {
   beforeAll,
   afterAll
 } from "matchstick-as/assembly/index"
-import { BigInt, Bytes } from "@graphprotocol/graph-ts"
+import { BigInt, Bytes } from "@starknet-graph/graph-ts"
 import { ExampleEvent } from "../generated/schema"
 import { ExampleEvent as ExampleEventEvent } from "../generated/Contract/Contract"
 import { handleExampleEvent } from "../src/contract"
@@ -465,7 +465,7 @@ describe("Describe entity assertions", () => {
 `);
     expect(utilsFile).toEqual(`\
 import { newMockEvent } from "matchstick-as"
-import { ethereum, BigInt, Bytes } from "@graphprotocol/graph-ts"
+import { ethereum, BigInt, Bytes } from "@starknet-graph/graph-ts"
 import { ExampleEvent, ExampleEvent1 } from "../generated/Contract/Contract"
 
 export function createExampleEventEvent(

@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/graphprotocol/graph-tooling",
+    "url": "https://github.com/starknet-graph/graph-tooling",
     "directory": "examples/ethereum-gravatar"
   },
   "license": "MIT",
@@ -18,9 +18,9 @@
     "deploy-local": "graph deploy example --ipfs http://127.0.0.1:5001 --node http://127.0.0.1:8020"
   },
   "devDependencies": {
-    "@graphprotocol/graph-cli": "0.51.0",
-    "@graphprotocol/graph-ts": "0.31.0",
     "@nomicfoundation/hardhat-toolbox": "^2.0.2",
+    "@starknet-graph/graph-cli": "0.51.0",
+    "@starknet-graph/graph-ts": "0.31.0",
     "hardhat": "^2.13.1"
   }
 }

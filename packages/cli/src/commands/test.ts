@@ -94,7 +94,7 @@ export default class TestCommand extends Command {
         'https://api.github.com/repos/LimeChain/matchstick/releases/latest',
         {
           headers: {
-            'User-Agent': '@graphprotocol/graph-cli',
+            'User-Agent': '@starknet-graph/graph-cli',
           },
         },
       );

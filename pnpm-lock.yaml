@@ -45,10 +45,10 @@ importers:
 
   examples/arweave-blocks-transactions:
     devDependencies:
-      '@graphprotocol/graph-cli':
+      '@starknet-graph/graph-cli':
         specifier: 0.50.1
         version: link:../../packages/cli
-      '@graphprotocol/graph-ts':
+      '@starknet-graph/graph-ts':
         specifier: 0.30.0
         version: link:../../packages/ts
 
@@ -61,10 +61,10 @@ importers:
         specifier: ^6.26.0
         version: 6.26.0
     devDependencies:
-      '@graphprotocol/graph-cli':
+      '@starknet-graph/graph-cli':
         specifier: 0.50.1
         version: link:../../packages/cli
-      '@graphprotocol/graph-ts':
+      '@starknet-graph/graph-ts':
         specifier: 0.30.0
         version: link:../../packages/ts
       mustache:
@@ -80,10 +80,10 @@ importers:
         specifier: ^6.26.0
         version: 6.26.0
     devDependencies:
-      '@graphprotocol/graph-cli':
+      '@starknet-graph/graph-cli':
         specifier: 0.50.1
         version: link:../../packages/cli
-      '@graphprotocol/graph-ts':
+      '@starknet-graph/graph-ts':
         specifier: 0.30.0
         version: link:../../packages/ts
 
@@ -99,10 +99,10 @@ importers:
         specifier: ^6.26.0
         version: 6.26.0
     devDependencies:
-      '@graphprotocol/graph-cli':
+      '@starknet-graph/graph-cli':
         specifier: 0.50.1
         version: link:../../packages/cli
-      '@graphprotocol/graph-ts':
+      '@starknet-graph/graph-ts':
         specifier: 0.30.0
         version: link:../../packages/ts
       mustache:
@@ -118,10 +118,10 @@ importers:
         specifier: ^6.26.0
         version: 6.26.0
     devDependencies:
-      '@graphprotocol/graph-cli':
+      '@starknet-graph/graph-cli':
         specifier: 0.50.1
         version: link:../../packages/cli
-      '@graphprotocol/graph-ts':
+      '@starknet-graph/graph-ts':
         specifier: 0.30.0
         version: link:../../packages/ts
       mustache:
@@ -170,10 +170,10 @@ importers:
         specifier: ^5.0.4
         version: 5.0.4
     devDependencies:
-      '@graphprotocol/graph-cli':
+      '@starknet-graph/graph-cli':
         specifier: 0.50.1
         version: link:../../packages/cli
-      '@graphprotocol/graph-ts':
+      '@starknet-graph/graph-ts':
         specifier: 0.30.0
         version: link:../../packages/ts
       '@nomicfoundation/hardhat-toolbox':
@@ -188,10 +188,10 @@ importers:
 
   examples/ethereum-gravatar:
     devDependencies:
-      '@graphprotocol/graph-cli':
+      '@starknet-graph/graph-cli':
         specifier: 0.50.1
         version: link:../../packages/cli
-      '@graphprotocol/graph-ts':
+      '@starknet-graph/graph-ts':
         specifier: 0.30.0
         version: link:../../packages/ts
       '@nomicfoundation/hardhat-toolbox':
@@ -203,25 +203,25 @@ importers:
 
   examples/example-subgraph:
     devDependencies:
-      '@graphprotocol/graph-ts':
+      '@starknet-graph/graph-ts':
         specifier: 0.30.0
         version: link:../../packages/ts
 
   examples/near-blocks:
     devDependencies:
-      '@graphprotocol/graph-cli':
+      '@starknet-graph/graph-cli':
         specifier: 0.50.1
         version: link:../../packages/cli
-      '@graphprotocol/graph-ts':
+      '@starknet-graph/graph-ts':
         specifier: 0.30.0
         version: link:../../packages/ts
 
   examples/near-receipts:
     devDependencies:
-      '@graphprotocol/graph-cli':
+      '@starknet-graph/graph-cli':
         specifier: 0.50.1
         version: link:../../packages/cli
-      '@graphprotocol/graph-ts':
+      '@starknet-graph/graph-ts':
         specifier: 0.30.0
         version: link:../../packages/ts
 
