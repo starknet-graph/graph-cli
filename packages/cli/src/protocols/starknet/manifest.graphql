@@ -1,0 +1,67 @@
+# This is a temporary manifest that's hardly accurate. It's a placeholder to get things to work for
+# the POC. Feel free to change this file as the implementation builds up.
+
+scalar String
+scalar File
+scalar BigInt
+
+type SubgraphManifest {
+  specVersion: String!
+  features: [String!]
+  schema: Schema!
+  description: String
+  repository: String
+  graft: Graft
+  dataSources: [DataSource!]!
+}
+
+type Schema {
+  file: File!
+}
+
+type DataSource {
+  kind: String!
+  name: String!
+  network: String
+  source: ContractSource!
+  mapping: ContractMapping!
+}
+
+type ContractSource {
+  startBlock: BigInt
+}
+
+type ContractMapping {
+  apiVersion: String!
+  language: String!
+  file: File!
+  entities: [String!]!
+  blockHandlers: [BlockHandler!]
+  eventHandlers: [EventHandler!]
+  transactionHandlers: [TransactionHandler!]
+}
+
+type TransactionHandler {
+  handler: String!
+}
+
+type BlockHandler {
+  handler: String!
+}
+
+enum EventOrigin {
+  BeginBlock
+  DeliverTx
+  EndBlock
+}
+
+type EventHandler {
+  event: String!
+  origin: EventOrigin
+  handler: String!
+}
+
+type Graft {
+  base: String!
+  block: BigInt!
+}
