@@ -476,6 +476,7 @@ async function processInitForm(
           protocol === 'arweave' ||
           protocol === 'cosmos' ||
           protocol === 'near' ||
+          protocol === 'starknet' ||
           initProduct === 'subgraph-studio' ||
           initProduct === 'hosted-service' ||
           initStudio !== undefined ||
