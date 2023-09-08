@@ -89,7 +89,7 @@ export default class SchemaCodeGenerator {
           'BigInt',
           'BigDecimal',
         ],
-        '@graphprotocol/graph-ts',
+        '@starknet-graph/graph-ts',
       ),
     ];
   }

@@ -1,4 +1,4 @@
-import { cosmos } from '@graphprotocol/graph-ts';
+import { cosmos } from '@starknet-graph/graph-ts';
 import { TokenSwap, Token } from '../generated/schema';
 
 export function handleSwaps(data: cosmos.EventData): void {

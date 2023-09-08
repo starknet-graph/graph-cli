@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/graphprotocol/graph-tooling",
+    "url": "https://github.com/starknet-graph/graph-tooling",
     "directory": "examples/near-receipts"
   },
   "license": "MIT",
@@ -17,7 +17,7 @@
     "deploy-local": "graph deploy example --ipfs http://localhost:5001 --node http://127.0.0.1:8020"
   },
   "devDependencies": {
-    "@graphprotocol/graph-cli": "workspace:*",
-    "@graphprotocol/graph-ts": "workspace:*"
+    "@starknet-graph/graph-cli": "workspace:*",
+    "@starknet-graph/graph-ts": "workspace:*"
   }
 }

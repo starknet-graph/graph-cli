@@ -11,7 +11,7 @@ export async function getGraphTsVersion(sourceDir: string) {
     // Continue with the parent directory, terminate after the root dir
     dir = path.dirname(dir) === dir ? undefined : path.dirname(dir)
   ) {
-    const graphTsNodeModulesPath = path.join(dir, 'node_modules', '@graphprotocol', 'graph-ts');
+    const graphTsNodeModulesPath = path.join(dir, 'node_modules', '@starknet-graph', 'graph-ts');
 
     if (fs.existsSync(graphTsNodeModulesPath)) {
       graphTsPath = graphTsNodeModulesPath;

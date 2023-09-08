@@ -1,4 +1,4 @@
-import { cosmos } from '@graphprotocol/graph-ts';
+import { cosmos } from '@starknet-graph/graph-ts';
 import { MsgDelegate, MsgCoin, decodeMsgDelegate } from './decoding';
 import { Delegation, Coin } from '../generated/schema';
 

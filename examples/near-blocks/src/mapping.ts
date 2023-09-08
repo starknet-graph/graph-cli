@@ -1,4 +1,4 @@
-import { near, BigInt } from '@graphprotocol/graph-ts';
+import { near, BigInt } from '@starknet-graph/graph-ts';
 import { BlockEvent } from '../generated/schema';
 
 export function handleBlock(block: near.Block): void {

@@ -2,7 +2,7 @@
   "name": "example-event-handler",
   "repository": {
     "type": "git",
-    "url": "https://github.com/graphprotocol/graph-tooling",
+    "url": "https://github.com/starknet-graph/graph-tooling",
     "directory": "examples/example-subgraph"
   },
   "private": true,
@@ -13,7 +13,7 @@
     "codegen": "../../packages/cli/bin/run codegen --output-dir src/types/ subgraph.yaml"
   },
   "devDependencies": {
-    "@graphprotocol/graph-ts": "workspace:*"
+    "@starknet-graph/graph-ts": "workspace:*"
   },
   "resolutions": {
     "assemblyscript": "0.19.10"
