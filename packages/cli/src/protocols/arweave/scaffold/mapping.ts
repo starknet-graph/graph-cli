@@ -1,6 +1,6 @@
 export const generatePlaceholderHandlers = () =>
   `
-  import { arweave, BigInt } from '@graphprotocol/graph-ts'
+  import { arweave, BigInt } from '@starknet-graph/graph-ts'
   import { Block, Transaction } from '../generated/schema'
 
   export function handleBlock(block: arweave.Block): void {

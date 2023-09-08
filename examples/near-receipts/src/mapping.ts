@@ -1,4 +1,4 @@
-import { BigInt, log, near } from '@graphprotocol/graph-ts';
+import { BigInt, log, near } from '@starknet-graph/graph-ts';
 import { Greeter, Greeting } from '../generated/schema';
 
 export function handleReceipt(receipt: near.ReceiptWithOutcome): void {

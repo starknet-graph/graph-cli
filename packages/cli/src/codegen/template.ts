@@ -30,7 +30,7 @@ export default class DataSourceTemplateCodeGenerator {
           'DataSourceTemplate',
           'DataSourceContext',
         ],
-        '@graphprotocol/graph-ts',
+        '@starknet-graph/graph-ts',
       ),
     ];
   }

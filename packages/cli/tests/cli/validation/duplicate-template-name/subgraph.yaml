@@ -1,5 +1,5 @@
 specVersion: 0.0.1
-repository: https://github.com/graphprotocol/test-subgraph
+repository: https://github.com/starknet-graph/test-subgraph
 description: Test subgraph
 schema:
   file: ./schema.graphql

@@ -1,5 +1,6 @@
 {
   "name": "lens-protocol-posts-sg",
+  "version": null,
   "license": "UNLICENSED",
   "private": true,
   "scripts": {
@@ -12,11 +13,10 @@
     "test": "graph test"
   },
   "dependencies": {
-    "@graphprotocol/graph-cli": "0.57.0",
-    "@graphprotocol/graph-ts": "0.31.0"
+    "@starknet-graph/graph-cli": "0.57.0",
+    "@starknet-graph/graph-ts": "0.31.0"
   },
   "devDependencies": {
     "matchstick-as": "0.5.2"
-  },
-  "version": null
+  }
 }
