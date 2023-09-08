@@ -627,7 +627,7 @@ async function processInitForm(
         type: 'confirm',
         name: 'indexEvents',
         message: 'Index contract events as entities',
-        initial: true,
+        initial: false,
         skip: () => !!initIndexEvents || isSubstreams,
       },
     ]);
