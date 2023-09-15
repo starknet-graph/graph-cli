@@ -47,7 +47,7 @@ type ExampleEntity @entity {
 
   test('Mapping (default)', () => {
     expect(scaffold.generateMapping()).toEqual(`\
-import { near, BigInt } from "@graphprotocol/graph-ts"
+import { near, BigInt } from "@starknet-graph/graph-ts"
 import { ExampleEntity } from "../generated/schema"
 
 export function handleReceipt(

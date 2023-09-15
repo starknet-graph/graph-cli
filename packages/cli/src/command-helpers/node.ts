@@ -73,7 +73,7 @@ export async function getHostedServiceSubgraphId({
     }),
     headers: {
       'content-type': 'application/json',
-      'User-Agent': '@graphprotocol/graph-cli',
+      'User-Agent': '@starknet-graph/graph-cli',
     },
   });
 

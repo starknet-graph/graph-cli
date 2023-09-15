@@ -1,5 +1,5 @@
 specVersion: 0.0.1
-repository: https://github.com/graphprotocol/near-subgraph
+repository: https://github.com/starknet-graph/near-subgraph
 description: NEAR subgraph
 schema:
   file: ./schema.graphql

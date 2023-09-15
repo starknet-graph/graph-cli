@@ -110,9 +110,9 @@ export default class Subgraph {
     subgraphDebug.extend('validate')('Validating repository in manifest');
     const repository = manifest.get('repository');
 
-    return /^https:\/\/github\.com\/graphprotocol\/graph-tooling?$/.test(repository) ||
+    return /^https:\/\/github\.com\/starknet-graph\/graph-tooling?$/.test(repository) ||
       // For legacy reasons, we should error on example subgraphs
-      /^https:\/\/github\.com\/graphprotocol\/example-subgraphs?$/.test(repository)
+      /^https:\/\/github\.com\/starknet-graph\/example-subgraphs?$/.test(repository)
       ? immutable.List().push(
           immutable.fromJS({
             path: ['repository'],

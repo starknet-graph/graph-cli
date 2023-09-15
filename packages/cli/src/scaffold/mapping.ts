@@ -19,7 +19,7 @@ type BlacklistDictionary = Record<string, string>;
  * Map of input names that are reserved so we do not use them as field names to avoid conflicts
  */
 export const INPUT_NAMES_BLACKLIST = {
-  /** Related to https://github.com/graphprotocol/graph-tooling/issues/710 */
+  /** Related to https://github.com/starknet-graph/graph-tooling/issues/710 */
   id: 'id',
 } as const;
 

@@ -9,7 +9,7 @@ import {
   TypedMap,
   Value,
   ValueKind,
-} from '@graphprotocol/graph-ts';
+} from '@starknet-graph/graph-ts';
 
 export class ExampleEntity extends Entity {
   constructor(id: string) {

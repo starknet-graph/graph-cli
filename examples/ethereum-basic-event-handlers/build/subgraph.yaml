@@ -1,6 +1,6 @@
 specVersion: 0.0.5
 description: Gravatar for Ethereum
-repository: https://github.com/graphprotocol/graph-tooling
+repository: https://github.com/starknet-graph/graph-tooling
 schema:
   file: schema.graphql
 dataSources:

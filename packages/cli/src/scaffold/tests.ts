@@ -134,7 +134,7 @@ const generateExampleTest = (
 
   return `
   import { assert, describe, test, clearStore, beforeAll, afterAll } from "matchstick-as/assembly/index"
-  import { ${importTypes} } from "@graphprotocol/graph-ts"
+  import { ${importTypes} } from "@starknet-graph/graph-ts"
   import { ${entity} } from "../generated/schema"
   import { ${
     indexEvents ? `${eventName} as ${eventName}Event` : eventName
@@ -181,7 +181,7 @@ const generateTestHelper = (contract: string, events: any[], importTypes: string
 
   return `
   import { newMockEvent } from 'matchstick-as';
-  import { ethereum, ${importTypes} } from '@graphprotocol/graph-ts';
+  import { ethereum, ${importTypes} } from '@starknet-graph/graph-ts';
   import { ${eventsNames.join(', ')} } from '../generated/${contract}/${contract}';
 
   ${generateMockedEvents(events).join('\n')}`;

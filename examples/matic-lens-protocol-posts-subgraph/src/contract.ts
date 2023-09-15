@@ -4,7 +4,7 @@ import {
   DataSourceContext,
   DataSourceTemplate,
   ipfs,
-} from '@graphprotocol/graph-ts';
+} from '@starknet-graph/graph-ts';
 import { PostCreated as PostCreatedEvent } from '../generated/Contract/Contract';
 import { PostContent, PostCreated } from '../generated/schema';
 
