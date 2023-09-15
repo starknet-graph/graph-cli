@@ -86,7 +86,7 @@ jobs:
       - name: 'Update branch (rename package)'
         run: |
           # We need to do this because the project enforces dependency sorting
-          pnpm i
+          pnpm install || pnpm install --no-frozen-lockfile
           git reset --hard
 
           find . -type f ! -name "*.md" ! -path "./.git/*" ! -path "./.github/*" ! -path "./node_modules/*" -exec sed -i "s/@graphprotocol/@starknet-graph/g" {} \;
@@ -108,7 +108,7 @@ jobs:
 
       - name: 'Install dependencies'
         run: |
-          pnpm install
+          pnpm install || pnpm install --no-frozen-lockfile
 
       - name: 'Build packages'
         run: |
