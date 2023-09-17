@@ -13,7 +13,7 @@
     "test": "graph test"
   },
   "dependencies": {
-    "@starknet-graph/graph-cli": "0.58.0",
+    "@starknet-graph/graph-cli": "0.58.0-1",
     "@starknet-graph/graph-ts": "0.31.0"
   },
   "devDependencies": {
