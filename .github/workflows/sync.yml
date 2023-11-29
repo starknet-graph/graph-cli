@@ -93,7 +93,7 @@ jobs:
           find . -type f ! -name "*.md" ! -path "./.git/*" ! -path "./.github/*" ! -path "./node_modules/*" -exec sed -i "s/github.com\/graphprotocol/github.com\/starknet-graph/g" {} \;
           find . -type f ! -name "*.md" ! -path "./.git/*" ! -path "./.github/*" ! -path "./node_modules/*" -exec sed -i "s/github\\\\.com\\\\\/graphprotocol/github\\\\\\.com\\\\\/starknet-graph/g" {} \;
 
-          yarn prettier --write .
+          ./node_modules/.bin/prettier --write .
           git clean -dfx
 
           git add .
