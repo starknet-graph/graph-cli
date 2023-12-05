@@ -1,8 +1,13 @@
 import { BigInt } from "@starknet-graph/graph-ts"
-import { Contract, Airdropped } from "../generated/Contract/Contract"
+import {
+  Contract,
+  Transfer,
+  Transfer1,
+  Transfer2
+} from "../generated/Contract/Contract"
 import { ExampleEntity } from "../generated/schema"
 
-export function handleAirdropped(event: Airdropped): void {
+export function handleTransfer(event: Transfer): void {
   // Entities can be loaded from the store using a string ID; this ID
   // needs to be unique across all entities of the same type
   let entity = ExampleEntity.load(event.transaction.from)
@@ -20,8 +25,6 @@ export function handleAirdropped(event: Airdropped): void {
   entity.count = entity.count + BigInt.fromI32(1)
 
   // Entity fields can be set based on event parameters
-  entity.to = event.params.to
-  entity.quantity = event.params.quantity
 
   // Entities can be written to the store with `.save()`
   entity.save()
@@ -41,5 +44,12 @@ export function handleAirdropped(event: Airdropped): void {
   // The following functions can then be called on this contract to access
   // state variables and other data:
   //
-  // None
+  // - contract.getSomething(...)
+  // - contract.getSomething(...)
+  // - contract.getSomething(...)
+  // - contract.doSomething(...)
 }
+
+export function handleTransfer1(event: Transfer1): void {}
+
+export function handleTransfer2(event: Transfer2): void {}

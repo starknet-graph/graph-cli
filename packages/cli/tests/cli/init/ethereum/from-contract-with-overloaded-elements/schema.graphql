@@ -1,6 +1,4 @@
 type ExampleEntity @entity {
   id: Bytes!
   count: BigInt!
-  to: [Bytes!]! # address[]
-  quantity: BigInt! # uint256
 }

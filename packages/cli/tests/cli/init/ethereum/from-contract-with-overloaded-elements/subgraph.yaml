@@ -13,11 +13,17 @@ dataSources:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - Airdropped
+        - Transfer
+        - Transfer1
+        - Transfer2
       abis:
         - name: Contract
           file: ./abis/Contract.json
       eventHandlers:
-        - event: Airdropped(address[],uint256,uint256)
-          handler: handleAirdropped
+        - event: Transfer()
+          handler: handleTransfer
+        - event: Transfer(address)
+          handler: handleTransfer1
+        - event: Transfer(address,address,address)
+          handler: handleTransfer2
       file: ./src/contract.ts
