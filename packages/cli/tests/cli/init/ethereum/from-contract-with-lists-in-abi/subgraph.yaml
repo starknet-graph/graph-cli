@@ -13,14 +13,11 @@ dataSources:
       apiVersion: 0.0.7
       language: wasm/assemblyscript
       entities:
-        - LogOperatorSet
-        - OwnershipTransferred
+        - Airdropped
       abis:
         - name: Contract
           file: ./abis/Contract.json
       eventHandlers:
-        - event: LogOperatorSet(indexed address,address,bool)
-          handler: handleLogOperatorSet
-        - event: OwnershipTransferred(indexed address,indexed address)
-          handler: handleOwnershipTransferred
+        - event: Airdropped(address[],uint256,uint256)
+          handler: handleAirdropped
       file: ./src/contract.ts

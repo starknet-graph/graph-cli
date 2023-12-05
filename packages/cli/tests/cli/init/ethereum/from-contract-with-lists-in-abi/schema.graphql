@@ -1,6 +1,6 @@
 type ExampleEntity @entity {
   id: Bytes!
   count: BigInt!
-  owner: Bytes! # address
-  operator: Bytes! # address
+  to: [Bytes!]! # address[]
+  quantity: BigInt! # uint256
 }
