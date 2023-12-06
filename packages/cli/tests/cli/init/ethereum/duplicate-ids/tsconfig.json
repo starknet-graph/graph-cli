@@ -1,4 +1,0 @@
-{
-  "extends": "@starknet-graph/graph-ts/types/tsconfig.base.json",
-  "include": ["src", "tests"]
-}
