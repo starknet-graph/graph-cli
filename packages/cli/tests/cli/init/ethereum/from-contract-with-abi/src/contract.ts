@@ -1,8 +1,18 @@
 import { BigInt } from "@starknet-graph/graph-ts"
-import { Contract, Upgrade, OwnerUpdate } from "../generated/Contract/Contract"
+import {
+  Contract,
+  AuctionCreated,
+  AuctionSuccessful,
+  AuctionCancelled,
+  ChangedPublicationFee,
+  ChangedOwnerCut,
+  Pause,
+  Unpause,
+  OwnershipTransferred
+} from "../generated/Contract/Contract"
 import { ExampleEntity } from "../generated/schema"
 
-export function handleUpgrade(event: Upgrade): void {
+export function handleAuctionCreated(event: AuctionCreated): void {
   // Entities can be loaded from the store using a string ID; this ID
   // needs to be unique across all entities of the same type
   let entity = ExampleEntity.load(event.transaction.from)
@@ -20,8 +30,8 @@ export function handleUpgrade(event: Upgrade): void {
   entity.count = entity.count + BigInt.fromI32(1)
 
   // Entity fields can be set based on event parameters
-  entity.newContract = event.params.newContract
-  entity.initializedWith = event.params.initializedWith
+  entity.Contract_id = event.params.id
+  entity.assetId = event.params.assetId
 
   // Entities can be written to the store with `.save()`
   entity.save()
@@ -41,9 +51,27 @@ export function handleUpgrade(event: Upgrade): void {
   // The following functions can then be called on this contract to access
   // state variables and other data:
   //
-  // - contract.proxyOwner(...)
-  // - contract.currentContract(...)
+  // - contract.nonFungibleRegistry(...)
+  // - contract.acceptedToken(...)
+  // - contract.paused(...)
+  // - contract.ownerCutPercentage(...)
   // - contract.owner(...)
+  // - contract.publicationFeeInWei(...)
+  // - contract.auctionByAssetId(...)
 }
 
-export function handleOwnerUpdate(event: OwnerUpdate): void {}
+export function handleAuctionSuccessful(event: AuctionSuccessful): void {}
+
+export function handleAuctionCancelled(event: AuctionCancelled): void {}
+
+export function handleChangedPublicationFee(
+  event: ChangedPublicationFee
+): void {}
+
+export function handleChangedOwnerCut(event: ChangedOwnerCut): void {}
+
+export function handlePause(event: Pause): void {}
+
+export function handleUnpause(event: Unpause): void {}
+
+export function handleOwnershipTransferred(event: OwnershipTransferred): void {}
