@@ -1,18 +1,12 @@
 import { BigInt } from "@starknet-graph/graph-ts"
 import {
   Contract,
-  AuctionCreated,
-  AuctionSuccessful,
-  AuctionCancelled,
-  ChangedPublicationFee,
-  ChangedOwnerCut,
-  Pause,
-  Unpause,
+  LogOperatorSet,
   OwnershipTransferred
 } from "../generated/Contract/Contract"
 import { ExampleEntity } from "../generated/schema"
 
-export function handleAuctionCreated(event: AuctionCreated): void {
+export function handleLogOperatorSet(event: LogOperatorSet): void {
   // Entities can be loaded from the store using a string ID; this ID
   // needs to be unique across all entities of the same type
   let entity = ExampleEntity.load(event.transaction.from)
@@ -30,8 +24,8 @@ export function handleAuctionCreated(event: AuctionCreated): void {
   entity.count = entity.count + BigInt.fromI32(1)
 
   // Entity fields can be set based on event parameters
-  entity.Contract_id = event.params.id
-  entity.assetId = event.params.assetId
+  entity.owner = event.params.owner
+  entity.operator = event.params.operator
 
   // Entities can be written to the store with `.save()`
   entity.save()
@@ -51,27 +45,39 @@ export function handleAuctionCreated(event: AuctionCreated): void {
   // The following functions can then be called on this contract to access
   // state variables and other data:
   //
-  // - contract.nonFungibleRegistry(...)
-  // - contract.acceptedToken(...)
-  // - contract.paused(...)
-  // - contract.ownerCutPercentage(...)
+  // - contract.getIsGlobalOperator(...)
+  // - contract.getMarketTokenAddress(...)
+  // - contract.getAccountValues(...)
+  // - contract.getMarketPriceOracle(...)
+  // - contract.getMarketInterestSetter(...)
+  // - contract.getMarketSpreadPremium(...)
+  // - contract.getNumMarkets(...)
+  // - contract.ownerWithdrawUnsupportedTokens(...)
+  // - contract.getIsLocalOperator(...)
+  // - contract.getAccountPar(...)
+  // - contract.getMarginRatio(...)
+  // - contract.getMarketCurrentIndex(...)
+  // - contract.getMarketIsClosing(...)
+  // - contract.getRiskParams(...)
+  // - contract.getMinBorrowedValue(...)
+  // - contract.getMarketPrice(...)
   // - contract.owner(...)
-  // - contract.publicationFeeInWei(...)
-  // - contract.auctionByAssetId(...)
+  // - contract.isOwner(...)
+  // - contract.ownerWithdrawExcessTokens(...)
+  // - contract.getMarketWithInfo(...)
+  // - contract.getLiquidationSpread(...)
+  // - contract.getAccountWei(...)
+  // - contract.getMarketTotalPar(...)
+  // - contract.getLiquidationSpreadForPair(...)
+  // - contract.getNumExcessTokens(...)
+  // - contract.getMarketCachedIndex(...)
+  // - contract.getAccountStatus(...)
+  // - contract.getEarningsRate(...)
+  // - contract.getRiskLimits(...)
+  // - contract.getMarket(...)
+  // - contract.getAdjustedAccountValues(...)
+  // - contract.getMarketMarginPremium(...)
+  // - contract.getMarketInterestRate(...)
 }
-
-export function handleAuctionSuccessful(event: AuctionSuccessful): void {}
-
-export function handleAuctionCancelled(event: AuctionCancelled): void {}
-
-export function handleChangedPublicationFee(
-  event: ChangedPublicationFee
-): void {}
-
-export function handleChangedOwnerCut(event: ChangedOwnerCut): void {}
-
-export function handlePause(event: Pause): void {}
-
-export function handleUnpause(event: Unpause): void {}
 
 export function handleOwnershipTransferred(event: OwnershipTransferred): void {}

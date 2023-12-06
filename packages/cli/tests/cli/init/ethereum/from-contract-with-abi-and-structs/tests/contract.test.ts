@@ -6,32 +6,28 @@ import {
   beforeAll,
   afterAll
 } from "matchstick-as/assembly/index"
-import { Bytes, BigInt, Address } from "@starknet-graph/graph-ts"
+import { Address } from "@starknet-graph/graph-ts"
 import { ExampleEntity } from "../generated/schema"
-import { AuctionCreated } from "../generated/Contract/Contract"
-import { handleAuctionCreated } from "../src/contract"
-import { createAuctionCreatedEvent } from "./contract-utils"
+import { LogOperatorSet } from "../generated/Contract/Contract"
+import { handleLogOperatorSet } from "../src/contract"
+import { createLogOperatorSetEvent } from "./contract-utils"
 
 // Tests structure (matchstick-as >=0.5.0)
 // https://thegraph.com/docs/en/developer/matchstick/#tests-structure-0-5-0
 
 describe("Describe entity assertions", () => {
   beforeAll(() => {
-    let id = Bytes.fromI32(1234567890)
-    let assetId = BigInt.fromI32(234)
-    let seller = Address.fromString(
+    let owner = Address.fromString("0x0000000000000000000000000000000000000001")
+    let operator = Address.fromString(
       "0x0000000000000000000000000000000000000001"
     )
-    let priceInWei = BigInt.fromI32(234)
-    let expiresAt = BigInt.fromI32(234)
-    let newAuctionCreatedEvent = createAuctionCreatedEvent(
-      id,
-      assetId,
-      seller,
-      priceInWei,
-      expiresAt
+    let trusted = "boolean Not implemented"
+    let newLogOperatorSetEvent = createLogOperatorSetEvent(
+      owner,
+      operator,
+      trusted
     )
-    handleAuctionCreated(newAuctionCreatedEvent)
+    handleLogOperatorSet(newLogOperatorSetEvent)
   })
 
   afterAll(() => {
@@ -48,26 +44,20 @@ describe("Describe entity assertions", () => {
     assert.fieldEquals(
       "ExampleEntity",
       "0xa16081f360e3847006db660bae1c6d1b2e17ec2a",
-      "assetId",
-      "234"
-    )
-    assert.fieldEquals(
-      "ExampleEntity",
-      "0xa16081f360e3847006db660bae1c6d1b2e17ec2a",
-      "seller",
+      "owner",
       "0x0000000000000000000000000000000000000001"
     )
     assert.fieldEquals(
       "ExampleEntity",
       "0xa16081f360e3847006db660bae1c6d1b2e17ec2a",
-      "priceInWei",
-      "234"
+      "operator",
+      "0x0000000000000000000000000000000000000001"
     )
     assert.fieldEquals(
       "ExampleEntity",
       "0xa16081f360e3847006db660bae1c6d1b2e17ec2a",
-      "expiresAt",
-      "234"
+      "trusted",
+      "boolean Not implemented"
     )
 
     // More assert options:

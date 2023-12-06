@@ -1,6 +1,6 @@
 type ExampleEntity @entity {
   id: Bytes!
   count: BigInt!
-  id: Bytes! # bytes32
-  assetId: BigInt! # uint256
+  owner: Bytes! # address
+  operator: Bytes! # address
 }
