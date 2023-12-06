@@ -1,4 +1,4 @@
-import { BigInt, cosmos } from '@graphprotocol/graph-ts';
+import { BigInt, cosmos } from '@starknet-graph/graph-ts';
 import { Block } from '../generated/schema';
 
 export function handleBlock(bl: cosmos.Block): void {

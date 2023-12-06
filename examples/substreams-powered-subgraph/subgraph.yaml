@@ -1,6 +1,6 @@
 specVersion: 0.0.4
 description: Ethereum Contract Tracking Subgraph (powered by Substreams)
-repository: https://github.com/graphprotocol/graph-tooling
+repository: https://github.com/starknet-graph/graph-tooling
 schema:
   file: schema.graphql
 dataSources:

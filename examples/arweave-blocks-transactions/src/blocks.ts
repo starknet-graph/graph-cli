@@ -1,4 +1,4 @@
-import { arweave, BigInt } from '@graphprotocol/graph-ts';
+import { arweave, BigInt } from '@starknet-graph/graph-ts';
 import { Block, Poa, Tag, Transaction } from '../generated/schema';
 
 function savePoa(id: string, poa: arweave.ProofOfAccess): string {

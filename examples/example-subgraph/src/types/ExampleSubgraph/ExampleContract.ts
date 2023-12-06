@@ -8,7 +8,7 @@ import {
   ethereum,
   JSONValue,
   TypedMap,
-} from '@graphprotocol/graph-ts';
+} from '@starknet-graph/graph-ts';
 
 export class ExampleEvent extends ethereum.Event {
   get params(): ExampleEvent__Params {

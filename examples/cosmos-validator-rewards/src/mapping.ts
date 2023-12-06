@@ -1,4 +1,4 @@
-import { cosmos } from '@graphprotocol/graph-ts';
+import { cosmos } from '@starknet-graph/graph-ts';
 import { Reward } from '../generated/schema';
 
 export function handleReward(data: cosmos.EventData): void {
